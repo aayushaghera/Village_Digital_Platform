@@ -1,24 +1,34 @@
-const express = require("express");
-const dotenv = require("dotenv");
-const mongoose = require("mongoose");
+import express from "express";
+import connectDB from "./config/db.js";
+import dotenv from "dotenv";
+import cors from "cors";
+
+
 dotenv.config();
-const connectDB = require("./config/db");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
+
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true
+}));
+
 app.use(express.json());
+
+
+import newsRoutes from "./routes/News.js";
+app.use("/api/news", newsRoutes);
 
 connectDB();
 
 // Routes
-const userRoutes = require("./routes/User");
+import userRoutes from "./routes/User.js";
 app.use("/api/users", userRoutes);
 
-const adminRoutes = require("./routes/Admin");
+import adminRoutes from "./routes/Admin.js";
 app.use("/api/admin", adminRoutes);
-
 
 app.get("/", (req, res) => {
   res.send("Backend is running!");
@@ -27,4 +37,5 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 });
+
 
