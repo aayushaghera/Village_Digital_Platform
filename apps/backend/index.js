@@ -16,6 +16,7 @@ app.use(cors({
 }));
 
 app.use(express.json());
+app.use("/api/news", newsRoutes);
 
 
 import newsRoutes from "./routes/News.js";
