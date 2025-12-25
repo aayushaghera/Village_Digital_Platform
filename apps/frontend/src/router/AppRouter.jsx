@@ -33,6 +33,7 @@ const AppRouter = () => {
         <Route path="/forgot-password" element={<ForgotPassword/>} />
         <Route path="/reset-password/:token" element={<ResetPassword/>} />
         <Route path="/VillageRegister" element={<Register/>} />
+        <Route path="/grievance" element={<Grievance />} />
       </Routes>
     </MainLayout>
   );

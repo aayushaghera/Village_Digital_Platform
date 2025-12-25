@@ -2,13 +2,16 @@ import express from "express";
 import connectDB from "./config/db.js";
 import dotenv from "dotenv";
 import cors from "cors";
-
+import http from "http";
+//import  initSocket from "./Socket/socket.js";
 
 dotenv.config();
 
 const app = express();
+//const server = http.createServer(app);
 const PORT = process.env.PORT || 3000;
 
+//initSocket(server);
 
 app.use(cors({
   origin: "http://localhost:5173",
@@ -29,6 +32,10 @@ app.use("/api/users", userRoutes);
 
 import adminRoutes from "./routes/Admin.js";
 app.use("/api/admin", adminRoutes);
+
+import grievanceRoutes from "./routes/Grievance.js";
+app.use("/api/grievances", grievanceRoutes);
+
 
 app.get("/", (req, res) => {
   res.send("Backend is running!");
